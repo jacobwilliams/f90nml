@@ -50,6 +50,28 @@ class NmlDict(OrderedDict):
                 lambda x: ''
         }
 
+
+    ##################
+    # see: 
+    #  * http://goodcode.io/articles/python-dict-object/
+    #  * http://stackoverflow.com/questions/2405590/how-do-i-override-getattr-in-python-without-breaking-the-default-behavior
+    
+    def __getattr__(self, name):
+        if name in self:
+            return self[name]
+        else:
+		 #default behavior:
+		 return OrderedDict.__getattr__(self, name)
+      
+    def __setattr__(self, name, value):
+        if name in self:
+            self[name] = value
+        else:
+		 #default behavior:
+	      return OrderedDict.__setattr__(self, name, value)
+							
+    ##################
+
     def __contains__(self, key):
         return super(NmlDict, self).__contains__(key.lower())
 
