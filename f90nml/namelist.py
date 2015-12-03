@@ -49,30 +49,30 @@ class NmlDict(OrderedDict):
             type(None):
                 lambda x: ''
         }
-    
+
     def __getattr__(self, name):
         if name in self:
             #object-like access:
             return self[name]
         else:
-		 #default behavior:
-		 return super(NmlDict, self).__getattr__(name)
-      
+            #default behavior:
+            return super(NmlDict, self).__getattr__(name)
+
     def __setattr__(self, name, value):
         if name in self:
             #object-like access:
             self[name] = value
         else:
-		 #default behavior:
-	      return super(NmlDict, self).__setattr__(name, value)
+            #default behavior:
+            return super(NmlDict, self).__setattr__(name, value)
 
     def __delattr__(self, name):
         if name in self:
             #object-like access:
             del self[name]
         else:
-		 #default behavior:
-	      super(NmlDict, self).__delattr__(name)
+            #default behavior:
+            super(NmlDict, self).__delattr__(name)
 
     def __contains__(self, key):
         return super(NmlDict, self).__contains__(key.lower())
